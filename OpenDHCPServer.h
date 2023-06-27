@@ -27,7 +27,7 @@
 #define MYBYTE unsigned char
 #define MYWORD unsigned short
 #define MYDWORD unsigned int
-#define strcasecmp _stricmp
+//#define strcasecmp _stricmp
 
 #if defined(_WIN64) || defined(_M_ALPHA)
 #define MAX_NATURAL_ALIGNMENT sizeof(ULONGLONG)
@@ -332,6 +332,7 @@ struct data19
 	SOCKET sock;
 	SOCKADDR_IN remote;
 	socklen_t sockLen;
+	long nonBlocking;
 	linger ling;
 	int memSize;
 	int bytes;
@@ -387,6 +388,7 @@ struct ConnType
 	SOCKADDR_IN addr;
 	MYDWORD server;
 	MYWORD port;
+	unsigned long nonBlocking;
 	bool loaded;
 	bool ready;
 };
@@ -398,6 +400,7 @@ struct DhcpConnType
 	MYDWORD server;
 	MYWORD port;
 	MYDWORD mask;
+	unsigned long nonBlocking;
 	int broadCastVal;
 	int broadCastSize;
 	int reUseVal;
@@ -487,7 +490,7 @@ struct data1
 	MYDWORD staticMasks[MAX_SERVERS];
 	SOCKET maxFD;
 	bool ready;
-	bool readyForChange;
+	bool busy;
 };
 
 struct data2
